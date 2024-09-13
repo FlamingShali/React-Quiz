@@ -4,6 +4,7 @@ import { useReducer, useEffect } from "react";
 import Loader from "./Loader";
 import Error from "./Error";
 import StartScreen from "./StartScreen";
+import Question from "./Question";
 const initialState = {
   status: "loading",
   questions: [],
@@ -16,7 +17,11 @@ function reducer(state, action) {
         ...state,
         questions: action.payload,
         status: "ready",
-        
+      };
+    case "start":
+      return {
+        ...state,
+        status: "active",
       };
     case "dataFailed":
       return {
@@ -45,7 +50,10 @@ function App() {
       <Main>
         {status === "error" && <Error />}
         {status === "loading" && <Loader />}
-        {status === "ready" && <StartScreen numQuestions={numQuestions} />}
+        {status === "ready" && (
+          <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
+        )}
+        {status === "active" && <Question />}
       </Main>
     </div>
   );
