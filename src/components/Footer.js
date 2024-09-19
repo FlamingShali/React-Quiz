@@ -1,10 +1,5 @@
-import { useEffect } from "react";
-
-
-const Footer = ({ children }) => {
-  
-
+function Footer({ children }) {
   return <footer>{children}</footer>;
-};
+}
 
 export default Footer;
